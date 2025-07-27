@@ -246,9 +246,27 @@ async function getGeneratedImage(filename, subfolder = '', type = 'output') {
     const settings = extension_settings[EXTENSION_NAME];
     let comfyuiUrl;
     if (subfolder) {
-        comfyuiUrl = `${settings.comfyui_url}/view?filename=${encodeURIComponent(filename)}&subfolder=${encodeURIComponent(subfolder)}&type=${type}`;
+    //  If it is an absolute path that starts with http or https, use it directly. Otherwise, assume it is a relative path.
+        if (settings.comfyui_url.startsWith('http')) {
+            comfyuiUrl = `${settings.comfyui_url}/view?filename=${encodeURIComponent(filename)}&subfolder=${encodeURIComponent(subfolder)}&type=${type}`;
+        } else {
+            // For relative paths, prepend a scheme and then concatenate
+            let base_url = window.location.origin;
+            if (window.location.protocol === "https:") {
+                base_url = base_url.replace("http:", "https:");
+            }
+            comfyuiUrl = `${base_url}${settings.comfyui_url}/view?filename=${encodeURIComponent(filename)}&subfolder=${encodeURIComponent(subfolder)}&type=${type}`;
+        }
     } else {
-        comfyuiUrl = `${settings.comfyui_url}/view?filename=${encodeURIComponent(filename)}&type=${type}`;
+        if (settings.comfyui_url.startsWith('http')) {
+            comfyuiUrl = `${settings.comfyui_url}/view?filename=${encodeURIComponent(filename)}&type=${type}`;
+        } else {
+            let base_url = window.location.origin;
+            if (window.location.protocol === "https:") {
+                base_url = base_url.replace("http:", "https:");
+            }
+            comfyuiUrl = `${base_url}${settings.comfyui_url}/view?filename=${encodeURIComponent(filename)}&type=${type}`;
+        }
     }
     console.log(`[${EXTENSION_NAME}] Getting image from: ${comfyuiUrl}`);
     return comfyuiUrl; // 直接返回URL，因为云服务器通常需要直接访问
@@ -1004,29 +1022,24 @@ function createPopup() {
                 </div>
             </div>
 
-            <!-- 新的两列布局 -->
             <div style="display: flex; gap: 20px; margin-top: 20px; flex-wrap: wrap;">
-                <!-- 左侧：设置管理 -->
                 <div style="flex: 1; min-width: 280px;">
                     <div class="comfyui-generator-management-container">
                         <div style="text-align: center; margin-bottom: 15px;">
                             <label class="comfyui-generator-label" style="display: block; margin-bottom: 10px;">设置管理</label>
                         </div>
                         <div id="comfyui-management-content">
-                            <!-- 设置管理内容将在这里动态插入 -->
-                        </div>
+                            </div>
                     </div>
                     <div class="comfyui-generator-management-container" style="margin-top: 20px;">
                         <div style="text-align: center; margin-bottom: 15px;">
                             <label class="comfyui-generator-label" style="display: block; margin-bottom: 10px;">已生成图片历史</label>
                         </div>
                         <div id="comfyui-image-history-content" style="max-height: 300px; overflow-y: auto; padding-right: 10px;">
-                            <!-- 图片历史记录将在这里动态插入 -->
-                        </div>
+                            </div>
                     </div>
                 </div>
 
-                <!-- 右侧：工作流JSON -->
                 <div style="flex: 1; min-width: 280px;">
                     <div class="comfyui-generator-input-section" style="margin: 0;">
                         <label class="comfyui-generator-label">ComfyUI工作流JSON:</label>
@@ -1419,7 +1432,7 @@ async function testConnection() {
  * @description 发送请求到ComfyUI生成图片。
  * @param {string} prompt - 原始提示词。
  * @param {string} buttonId - 触发生成操作的按钮ID。
- * @param {jQuery} $button - 触发生成操作的jQuery按钮对象。
+ * @param {jQuery} $button - 触发生成操作的jQuery对象。
  */
 async function generateImage(prompt, buttonId, $button) {
     console.log(`[${EXTENSION_NAME}] Generating image for prompt: ${prompt}`);
