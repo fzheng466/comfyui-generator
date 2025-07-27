@@ -12,8 +12,8 @@ const DEFAULT_SETTINGS = {
     generated_images: [] // 添加图片存储数组
 };
 
-// 提示词提取正则
-const IMAGE_PROMPT_REGEX = /image###\s*(.*?)\s*###/gi;
+// 提示词提取正则 - 修复：使用 [\s\S]*? 来匹配包括换行符在内的所有字符
+const IMAGE_PROMPT_REGEX = /image###([\s\S]*?)###/gi;
 
 // WebSocket连接管理
 const wsConnections = new Map();
