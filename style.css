@@ -1,0 +1,136 @@
+/* 弹出对话框容器 */
+.comfyui-generator-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    z-index: 1001;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    display: none;
+    color: #ffffff;
+}
+
+.comfyui-generator-popup-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 10px;
+}
+
+.comfyui-generator-input-section {
+    margin-bottom: 15px;
+}
+
+.comfyui-generator-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.comfyui-generator-input {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.comfyui-generator-textarea {
+    width: 100%;
+    height: 150px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+    font-size: 12px;
+    font-family: monospace;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.comfyui-generator-popup-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.comfyui-generator-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    border: none;
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.comfyui-generator-btn:hover {
+    background-color: #0056b3;
+}
+
+.comfyui-generator-close-btn {
+    padding: 8px 20px;
+    background-color: #6c757d;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.comfyui-generator-close-btn:hover {
+    background-color: #545b62;
+}
+
+/* 生图按钮样式 */
+.comfyui-generate-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 5px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: background-color 0.2s ease;
+}
+
+.comfyui-generate-btn:hover {
+    background-color: #218838;
+}
+
+.comfyui-generate-btn:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+}
+
+.comfyui-generated-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 5px;
+    background-color: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+}

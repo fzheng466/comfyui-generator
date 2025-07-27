@@ -1,0 +1,11 @@
+{
+    "display_name": "ComfyUI生图助手",
+    "loading_order": 16,
+    "requires": [],
+    "optional": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "你的名字",
+    "version": "1.0.0",
+    "description": "自动识别对话中的图像提示词并通过ComfyUI生成图像"
+}
